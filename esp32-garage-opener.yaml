@@ -7,17 +7,18 @@ esphome:
 logger:
 
 ota:
-  password: "721d66739270b6ca6236bb1d12f03ad3"
+  password: !secret garage_door_ota_password
+
 
 wifi:
   ssid: "StephensFamilyWAP1"
-  password: "JUfadrExase5#"
+  password: !secret garage_door_wifi_password
   power_save_mode: none
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Esp32-Garage-Door"
-    password: "xXB9ZQPJPNqV"
+    password: !secret garage_door_ap_password
 
 captive_portal:
 
