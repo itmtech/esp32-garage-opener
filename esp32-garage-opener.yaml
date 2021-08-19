@@ -25,8 +25,17 @@ captive_portal:
 # Enable Home Assistant API
 api:
 
+mqtt:
+  broker: 192.168.1.29
+  username: !secret mqtt_user
+  password: !secret mqtt_password
+
 globals:
   - id: performing_last_movement_main
+    type: boolean
+    restore_value: no
+    initial_value: 'false'
+  - id: performing_last_movement_other
     type: boolean
     restore_value: no
     initial_value: 'false'
@@ -76,7 +85,7 @@ binary_sensor:
     filters:
       - delayed_on: 1000ms #Wait to stop moving (1000ms for mechanical, higher for magnetic - depending on magnet strength)
       - delayed_off: 1000ms #Wait to start moving (1000ms for mechanical, higher for magnetic - depending on magnet strength)
- - platform: gpio
+  - platform: gpio
     pin:
       number: 34
       mode: INPUT_PULLUP
@@ -205,7 +214,7 @@ cover:
             id(performing_last_movement_main) = false;
             id(main_garage_switch).turn_on();
           }
-- platform: template
+  - platform: template
     name: "Other Garage Door"
     id: other_garage_door
     device_class: garage
